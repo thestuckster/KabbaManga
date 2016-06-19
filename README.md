@@ -1,7 +1,7 @@
 Kabba Manga
 ============
-[Manga eden api docs](https://www.mangaeden.com/api/)
-[Waffle board](https://waffle.io/thestuckster/KabbaManga)
+1. [Manga eden api docs](https://www.mangaeden.com/api/)
+2. [Waffle board](https://waffle.io/thestuckster/KabbaManga)
 
 To start the live reload dev page run: `ionic serve` within the apps folders.
 
