@@ -1,11 +1,14 @@
 <ion-view view-title="Manga List">
   <ion-content>
     <h1>Manga List Test</h1>
-    <div ng-repeat="m in manga">
-      <div>
+    <div class="list" ng-repeat="m in manga">
+
+      <a class="item item-avatar">
         <img ng-src="{{ 'https://cdn.mangaeden.com/mangasimg/' + m.image }}" />
-        <p> {{m.title}} </p>
-      </div>
+        <h2>{{m.title}}</h2>
+        <p>{{m.genres}}</p>
+      </a>
+
     </div>
   </ion-content>
 </ion-view>
