@@ -1,48 +1,33 @@
 var app = angular.module('kabaMangaApp');
 
-app.controller('mangaListCtrl', ["$scope", "$http", function($scope, $http) {
-  // allows CORS requests.
+app.controller('mangaListCtrl', ["$scope", "$http", "MangaService", function($scope, $http, MangaService) {
+
   $http.defaults.useXDomain = true;
 
-  //setup scope objects.
-  $scope.manga = [];
 
-//get a list of manga
-  $http({
-    method: 'GET',
-    url: "https://www.mangaeden.com/api/list/0/"
-  }).then(function success(res) {
+  function grabManga() {
+    $scope.manga = MangaService.getMangaListRange(0, 10);
+    addGenreList($scope.manga);
+  }
 
-    var dataList = res.data["manga"];
-    for(var i = 0; i < 9; i++) {
 
-      var genreList = dataList[i]["c"];
-      var currentManga = {};
-      currentManga.genres = "";
+  function addGenreList(manga) {
+    console.info("Adding Genres");
+    for(var i = 0; i < manga.length; i++) {
 
-      buildManga(currentManga, dataList, genreList, i);
+      var currentManga = manga[i];
+      var genres = "";
+      angular.forEach(currentManga["c"], function(genre) {
+        genres += genre + ", ";
+      });
 
-      $scope.manga.push(currentManga);
+
+      //remove trailing commas from list.
+      genres = genres.substring(0, genres.length -2);
+      currentManga.genres = genres;
     }
-  });
-
-  function buildManga(currentManga, dataList, genreList, i) {
-    buildTitleAndCover(currentManga, dataList, i);
-    buildGenreList(currentManga, genreList);
   }
 
-  function buildTitleAndCover(currentManga, dataList, i) {
-    currentManga.title = dataList[i]["t"];
-    currentManga.image = dataList[i]["im"];
-  }
-
-  function buildGenreList(currentManga, genreList) {
-    angular.forEach(genreList, function(genre) {
-      currentManga.genres += genre+", ";
-    });
-    //remove trailing comma.
-    currentManga.genres = currentManga.genres.substring(0, currentManga.genres.length -2);
-  }
-
+  grabManga();
 
 }]);

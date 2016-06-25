@@ -1,6 +1,6 @@
 angular.module('kabaMangaApp.controllers', [])
 
-.controller('AppCtrl', function($scope, $ionicModal, $timeout) {
+.controller('AppCtrl', function($scope, $ionicModal, $timeout, $http,  MangaService) {
 
   // With the new view caching in Ionic, Controllers are only called
   // when they are recreated or on app start, instead of every page change.
@@ -9,6 +9,16 @@ angular.module('kabaMangaApp.controllers', [])
   //$scope.$on('$ionicView.enter', function(e) {
   //});
 
+  $http.defaults.useXDomain = true;
+  $http({
+    method: 'GET',
+    url: "https://www.mangaeden.com/api/list/0/"
+  }).then(function success(res) {
+    console.info("GOT MANGAS");
+    var manga = res.data["manga"];
+    MangaService.setManga(manga);
+  });
+  
   // Form data for the login modal
   $scope.loginData = {};
 

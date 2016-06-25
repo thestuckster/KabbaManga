@@ -4,8 +4,8 @@
     <div class="card" ng-repeat="m in manga">
 
       <a class="item item-thumbnail-right" href="#">
-        <img ng-src="{{ 'https://cdn.mangaeden.com/mangasimg/' + m.image }}" />
-        <h2>{{m.title}}</h2>
+        <img ng-src="{{ 'https://cdn.mangaeden.com/mangasimg/' + m['im'] }}" />
+        <h2>{{m["t"]}}</h2>
         <p>{{m.genres}}</p>
       </a>
 
