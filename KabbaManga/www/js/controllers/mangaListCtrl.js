@@ -1,8 +1,16 @@
 var app = angular.module('kabaMangaApp');
 
-app.controller('mangaListCtrl', ["$scope", "$http", "MangaService", function($scope, $http, MangaService) {
+app.controller('mangaListCtrl', ["$scope", "$location", "$http", "MangaService", "MangaDetailService",
+                function($scope, $location,  $http, MangaService, MangaDetailService) {
 
   $http.defaults.useXDomain = true;
+
+
+  $scope.goToDetailView = function goToDetailView(mangaToDetail) {
+    MangaDetailService.setManga(mangaToDetail);
+    $location.path("/app/detail");
+  };
+
 
 
   function grabManga() {

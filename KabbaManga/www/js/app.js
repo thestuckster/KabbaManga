@@ -77,7 +77,17 @@ angular.module('kabaMangaApp', ['ionic','kabaMangaApp.controllers'])
         controller: 'mangaListCtrl'
       }
     }
-  });
+  })
+
+    .state('app.detail', {
+      url: '/detail',
+      views: {
+        'menuContent': {
+          templateUrl: 'templates/manga_detail.html',
+          controller: 'mangaDetailCtrl'
+        }
+      }
+    });
 
   // if none of the above states are matched, use this as the fallback
   $urlRouterProvider.otherwise('/app/playlists');
