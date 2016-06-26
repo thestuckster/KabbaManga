@@ -8,6 +8,13 @@ app.service("MangaService", [function() {
 
   this.manga = [];
 
+  /** sorts manga list alphabetically by title **/
+  this.sortByTitle = function sortByTitle() {
+    this.manga = this.manga.sort(function(a,b) {
+      return (a["t"] > b["t"]) ? 1 : ((a["t"] < b["t"]) ? -1 : 0);
+    });
+  };
+
   /** Sets manga list when manga is returned from API **/
   this.setManga = function setManga(manga) {
     this.manga = manga;

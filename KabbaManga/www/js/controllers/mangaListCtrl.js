@@ -6,7 +6,8 @@ app.controller('mangaListCtrl', ["$scope", "$http", "MangaService", function($sc
 
 
   function grabManga() {
-    $scope.manga = MangaService.getMangaListRange(0, 10);
+    MangaService.sortByTitle();
+    $scope.manga = MangaService.getMangaListRange(74, 102);
     addGenreList($scope.manga);
   }
 
