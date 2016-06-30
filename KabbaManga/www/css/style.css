@@ -1,1 +1,27 @@
-/* Empty. Add your own CSS if you like */
+#detail_image {
+  display: block;
+  margin-left: auto;
+  margin-right: auto;
+  height: 25%;
+  width: 50%;
+}
+
+#detail_description {
+  text-indent: 5%;
+}
+
+#status_completed {
+  text-align: center;
+  color: green;
+}
+
+#status_ongoing {
+  text-align: center;
+  color:orange;
+}
+
+#chapter_selection {
+  text-align: center;
+}
+
+

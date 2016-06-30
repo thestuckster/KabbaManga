@@ -1,6 +1,55 @@
-<ion-view view-title={{detailTitle}}>
+<ion-view view-title="Details">
   <ion-content>
-    <p>{{detailMange["author"]}}</p>
-    <p>Description: {{detailManga["description"]}}</p>
+    <div class="list card">
+
+      <div class="item item-avatar">
+        <h2>{{detailTitle}}</h2>
+        <h3>By: {{detailAuthor}}</h3>
+      </div>
+
+      <div class="item item-body">
+        <img id="detail_image" ng-src="{{detailImage}}" />
+
+        <span>
+          <p id="status_completed" ng-if="detailStatus == 1">{{"Status: " + detailCompleted}}</p>
+          <p id="status_ongoing" ng-if="detailStatus == 0">{{"Status: " + detailOngoing}}</p>
+        </span>
+
+        <div class="row">
+          <div class="col">
+            <p>{{"Created: " + detailStartDate}}</p>
+          </div>
+
+          <div class="col">
+            <p>{{"Updated: " + detailLastUpdate}}</p>
+          </div>
+
+          <div class="col">
+            <p>{{"Chapters Available: " + detailNumberOfChapers}}</p>
+          </div>
+        </div>
+
+        <p>{{detailGenres}}</p>
+
+        <div>
+          <p id="detail_description">{{"\t" +detailDescription}}</p>
+        </div>
+
+      </div>
+
+      <div class="item item-divider">
+        <p id="chapter_selection">Chapter selection</p>
+
+        <div class="row" ng-repeat="chp in detailChapters">
+          <div class="col">
+            <button class="button button-full button-royal">{{chp[0]}}</button>
+          </div>
+
+
+        </div>
+
+      </div>
+
+    </div>
   </ion-content>
 </ion-view>

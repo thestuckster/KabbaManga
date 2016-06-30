@@ -11,14 +11,11 @@ app.controller('mangaListCtrl', ["$scope", "$location", "$http", "MangaService",
     $location.path("/app/detail");
   };
 
-
-
   function grabManga() {
     MangaService.sortByTitle();
-    $scope.manga = MangaService.getMangaListRange(74, 102);
+    $scope.manga = MangaService.getMangaListRange(300, 450);
     addGenreList($scope.manga);
   }
-
 
   function addGenreList(manga) {
     console.info("Adding Genres");
