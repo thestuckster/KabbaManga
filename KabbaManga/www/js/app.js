@@ -87,6 +87,16 @@ angular.module('kabaMangaApp', ['ionic','kabaMangaApp.controllers'])
           controller: 'mangaDetailCtrl'
         }
       }
+    })
+
+    .state('app.chapter', {
+      url: '/chapter',
+      views: {
+        'menuContent': {
+          templateUrl: 'templates/chapter_view.html',
+          controller: 'chapterViewCtrl'
+        }
+      }
     });
 
   // if none of the above states are matched, use this as the fallback

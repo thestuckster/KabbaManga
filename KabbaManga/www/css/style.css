@@ -24,4 +24,14 @@
   text-align: center;
 }
 
+#page_view {
+
+  height:95%;
+  width: 95%;
+
+  -webkit-background-size: contain;
+  -moz-background-size: contain;
+  -o-background-size: contain;
+  background-size: contain;
+}
 

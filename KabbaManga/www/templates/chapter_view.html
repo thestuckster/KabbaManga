@@ -1,0 +1,11 @@
+<ion-content scroll="false">
+
+  <ion-slides  options="options" slider="data.slider">
+    <ion-slide-page ng-repeat="page in chapterPages">
+      <br>
+      <br>
+
+      <img id="page_view" ng-src="{{ 'https://cdn.mangaeden.com/mangasimg/' + page[1] }}" />
+    </ion-slide-page>
+
+</ion-content>
