@@ -37,7 +37,7 @@ app.controller('mangaDetailCtrl', ["$scope", "$location", "$http", "MangaDetailS
     }
 
     function unixTimeToDate(unixTime) {
-      var time = new Date(unixTime);
+      var time = moment.unix(unixTime);
 
       return moment(time).format("MM/DD/YYYY");
     }
@@ -46,5 +46,5 @@ app.controller('mangaDetailCtrl', ["$scope", "$location", "$http", "MangaDetailS
       MangaChapterViewService.setChapter(chapter);
       $location.path("/app/chapter");
     };
-    
+
   }]);
