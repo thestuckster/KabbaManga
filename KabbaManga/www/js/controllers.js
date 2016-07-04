@@ -9,6 +9,8 @@ angular.module('kabaMangaApp.controllers', [])
   //$scope.$on('$ionicView.enter', function(e) {
   //});
 
+  $scope.hasManga = false;
+
   $http.defaults.useXDomain = true;
   $http({
     method: 'GET',
@@ -16,9 +18,10 @@ angular.module('kabaMangaApp.controllers', [])
   }).then(function success(res) {
     console.info("GOT MANGAS");
     var manga = res.data["manga"];
+    $scope.hasManga = true;
     MangaService.setManga(manga);
   });
-  
+
   // Form data for the login modal
   $scope.loginData = {};
 

@@ -1,6 +1,13 @@
 <ion-view view-title="Playlists">
   <ion-content>
-    <ion-list>
+
+    <div class="spinner" ng-if="!hasManga">
+      <div class="bounce1"></div>
+      <div class="bounce2"></div>
+      <div class="bounce3"></div>
+    </div>
+
+    <ion-list ng-if="hasManga">
       <ion-item href="#/app/mangaList">
         Manga List
       </ion-item>
