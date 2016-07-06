@@ -41,6 +41,7 @@ angular.module('kabaMangaApp', ['ionic','kabaMangaApp.controllers'])
     }
   })
 
+  //TODO: probably not needed. 
   .state('app.browse', {
       url: '/browse',
       views: {
@@ -49,25 +50,15 @@ angular.module('kabaMangaApp', ['ionic','kabaMangaApp.controllers'])
         }
       }
     })
-    .state('app.playlists', {
-      url: '/playlists',
+    .state('app.main', {
+      url: '/home',
       views: {
         'menuContent': {
-          templateUrl: 'templates/playlists.html',
-          controller: 'PlaylistsCtrl'
+          templateUrl: 'templates/home.html',
+          controller: 'HomeCtrl'
         }
       }
     })
-
-  .state('app.single', {
-    url: '/playlists/:playlistId',
-    views: {
-      'menuContent': {
-        templateUrl: 'templates/playlist.html',
-        controller: 'PlaylistCtrl'
-      }
-    }
-  })
 
   .state('app.manga', {
     url: '/mangaList',
@@ -100,5 +91,5 @@ angular.module('kabaMangaApp', ['ionic','kabaMangaApp.controllers'])
     });
 
   // if none of the above states are matched, use this as the fallback
-  $urlRouterProvider.otherwise('/app/playlists');
+  $urlRouterProvider.otherwise('/app/home');
 });

@@ -4,11 +4,12 @@
 
 var app = angular.module('kabaMangaApp');
 
-app.controller('chapterViewCtrl', ["$scope", "$location", "$http", "MangaChapterViewService",
-  function($scope, $location,  $http, MangaChapterViewService) {
+app.controller('chapterViewCtrl', ["$scope", "$location", "$http", "$timeout", "MangaChapterViewService",
+  function($scope, $location,  $http, $timeout, MangaChapterViewService) {
 
 
     $scope.viewManga = MangaChapterViewService.getChapter();
+    MangaChapterViewService.clearData();
     $scope.chapterPages = [];
 
     $http.defaults.useXDomain = true;
