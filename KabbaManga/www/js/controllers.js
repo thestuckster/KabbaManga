@@ -20,6 +20,7 @@ angular.module('kabaMangaApp.controllers', [])
     var manga = res.data["manga"];
     $scope.hasManga = true;
     MangaService.setManga(manga);
+    MangaService.sortMangaIntoAlphabet();
   });
 
   // Form data for the login modal

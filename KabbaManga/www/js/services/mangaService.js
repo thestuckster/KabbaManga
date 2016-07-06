@@ -7,12 +7,39 @@ var app = angular.module('kabaMangaApp');
 app.service("MangaService", [function() {
 
   this.manga = [];
+  this.mangaAlphabet = {};
 
   /** sorts manga list alphabetically by title **/
   this.sortByTitle = function sortByTitle() {
     this.manga = this.manga.sort(function(a,b) {
       return (a["t"] > b["t"]) ? 1 : ((a["t"] < b["t"]) ? -1 : 0);
     });
+  };
+
+  /** sorts manga into a big ass json by starting letter and shit **/
+  this.sortMangaIntoAlphabet = function sortMangeIntoAlphabet() {
+
+    //StackOverflow says this is the fastest loop and since there's 16k manga, why the fuck not?
+    var i = this.manga.length;
+    while(i--) {
+
+      var currentTitle = this.manga[i]["t"];
+      var startingCharacter = currentTitle.charAt(0).toLowerCase();
+
+      if(this.mangaAlphabet.hasOwnProperty(startingCharacter)) {
+        this.mangaAlphabet[startingCharacter].push(currentTitle);
+
+      } else {
+        this.mangaAlphabet[startingCharacter] = [];
+        this.mangaAlphabet[startingCharacter].push(currentTitle);
+
+      }
+    }
+  };
+
+  /** Returns a list of manga that start with a given letter **/ 
+  this.getMangaByStartingLetter = function getMangaByStartingLetter(startingLetter) {
+    return this.mangaAlphabet[startingLetter];
   };
 
   /** Sets manga list when manga is returned from API **/
