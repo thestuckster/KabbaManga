@@ -1,7 +1,7 @@
 var app = angular.module('kabaMangaApp');
 
-app.controller('mangaListCtrl', ["$scope", "$timeout","$location", "$http", "MangaService", "MangaDetailService",
-                function($scope, $timeout, $location,  $http, MangaService, MangaDetailService) {
+app.controller('mangaListCtrl', ["$scope", "$timeout","$location", "$http", "MangaService", "MangaDetailService", "GenreFilterService",
+                function($scope, $timeout, $location,  $http, MangaService, MangaDetailService, GenreFilterService) {
 
   $http.defaults.useXDomain = true;
   
@@ -10,6 +10,8 @@ app.controller('mangaListCtrl', ["$scope", "$timeout","$location", "$http", "Man
     MangaDetailService.setManga(mangaToDetail);
     $location.path("/app/detail");
   };
+
+  $scope.genreFilter = GenreFilterService.getGenre();
 
 
   function grabManga() {

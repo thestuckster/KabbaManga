@@ -1,6 +1,7 @@
 angular.module('kabaMangaApp.controllers', [])
 
 
+
 .controller('AppCtrl', function($scope, $ionicModal, $timeout, $http, MangaService) {
 
   // With the new view caching in Ionic, Controllers are only called
@@ -13,7 +14,7 @@ angular.module('kabaMangaApp.controllers', [])
   $scope.hasManga = false;
   
   //Filter Manga By Genre
-  $scope.genreFilter = "Historical";
+  //$scope.genreFilter = "Historical";
 
   
   $http.defaults.useXDomain = true;

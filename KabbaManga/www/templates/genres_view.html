@@ -2,7 +2,7 @@
   <ion-content>  
     <center><h1>Genres</h1></center>
     <ion-list>
-      <ion-item ng-repeat="g in genres" href="#/app/mangaByGenre">
+      <ion-item ng-repeat="g in genres" href="#/app/mangaByGenre" ng-click=setGenre(g)>
         <center>{{g}}</center>
       </ion-item>
     </ion-list>

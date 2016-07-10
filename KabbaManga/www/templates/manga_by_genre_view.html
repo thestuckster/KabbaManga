@@ -1,6 +1,5 @@
 <ion-view view-title="Manga List">
   <ion-content>
-  <p>{{selectedGenre}}</p>
     <div class="card" ng-repeat="m in manga" ng-if="m['c'].includes(genreFilter)" ng-click="goToDetailView(m);">
       <div class="item item-thumbnail-right"  href>
         <img ng-src="{{ 'https://cdn.mangaeden.com/mangasimg/' + m['im'] }}" />

@@ -85,7 +85,7 @@ angular.module('kabaMangaApp', ['ionic','kabaMangaApp.controllers'])
       views: {
         'menuContent': {
           templateUrl: 'templates/genres_view.html',
-          controller: 'mangaListCtrl'
+          controller: 'genreCtrl'
         }
       }
     })
