@@ -80,6 +80,26 @@ angular.module('kabaMangaApp', ['ionic','kabaMangaApp.controllers'])
       }
     })
 
+    .state('app.genres', {
+      url: '/genres',
+      views: {
+        'menuContent': {
+          templateUrl: 'templates/genres_view.html',
+          controller: 'mangaListCtrl'
+        }
+      }
+    })
+
+    .state('app.mangaByGenre', {
+      url: '/mangaByGenre',
+      views: {
+        'menuContent': {
+          templateUrl: "templates/manga_by_genre_view.html",
+          controller: 'mangaListCtrl'
+        }
+      }
+    })
+
     .state('app.chapter', {
       url: '/chapter',
       views: {

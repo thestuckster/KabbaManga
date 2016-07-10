@@ -24,7 +24,24 @@
         <ion-item menu-close href="#/app/mangaList">
           Manga List
         </ion-item>
+        <ion-item menu-close href="#/app/genres">
+          Genres
+        </ion-item>
       </ion-list>
     </ion-content>
   </ion-side-menu>
+
+  <ion-side-menu side="right">
+    <ion-header-bar class="bar-stable">
+      <h1 class="title">Sort By Genres</h1>
+    </ion-header-bar>
+    <ion-content>
+      <ion-list ">
+        <ion-item ng-repeat="g in genres">
+          <ion-checkbox>{{g}}</ion-checkbox>
+        </ion-item>
+      </ion-list>
+    </ion-content>
+  </ion-side-menu>
+  
 </ion-side-menus>

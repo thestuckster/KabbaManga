@@ -1,6 +1,5 @@
-<ion-view view-title="Kabba Manga">
+<ion-view view-title="Kabba Manga"> 
   <ion-content>
-
     <div class="spinner" ng-if="!hasManga">
       <div class="bounce1"></div>
       <div class="bounce2"></div>
@@ -12,6 +11,9 @@
     <ion-list ng-if="hasManga">
       <ion-item href="#/app/mangaList">
         Manga List
+      </ion-item>
+      <ion-item href="#/app/genres">
+        Genres
       </ion-item>
     </ion-list>
   </ion-content>

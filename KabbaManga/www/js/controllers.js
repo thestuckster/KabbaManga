@@ -1,6 +1,7 @@
 angular.module('kabaMangaApp.controllers', [])
 
-.controller('AppCtrl', function($scope, $ionicModal, $timeout, $http,  MangaService) {
+
+.controller('AppCtrl', function($scope, $ionicModal, $timeout, $http, MangaService) {
 
   // With the new view caching in Ionic, Controllers are only called
   // when they are recreated or on app start, instead of every page change.
@@ -10,7 +11,11 @@ angular.module('kabaMangaApp.controllers', [])
   //});
 
   $scope.hasManga = false;
+  
+  //Filter Manga By Genre
+  $scope.genreFilter = "Historical";
 
+  
   $http.defaults.useXDomain = true;
   $http({
     method: 'GET',
@@ -21,6 +26,7 @@ angular.module('kabaMangaApp.controllers', [])
     $scope.hasManga = true;
     MangaService.setManga(manga);
     MangaService.sortMangaIntoAlphabet();
+    $scope.genres = MangaService.genreList.sort();
   });
 
   // Form data for the login modal
@@ -65,6 +71,7 @@ angular.module('kabaMangaApp.controllers', [])
     { title: 'Cowbell', id: 6 }
   ];
 })
+
 
 .controller('PlaylistCtrl', function($scope, $stateParams) {
 });

@@ -8,6 +8,8 @@ app.service("MangaService", [function() {
 
   this.manga = [];
   this.mangaAlphabet = {};
+  this.genreList = [];
+  
 
   /** sorts manga list alphabetically by title **/
   this.sortByTitle = function sortByTitle() {
@@ -15,6 +17,7 @@ app.service("MangaService", [function() {
       return (a["t"] > b["t"]) ? 1 : ((a["t"] < b["t"]) ? -1 : 0);
     });
   };
+
 
   /** sorts manga into a big ass json by starting letter and shit **/
   this.sortMangaIntoAlphabet = function sortMangeIntoAlphabet() {
@@ -25,6 +28,8 @@ app.service("MangaService", [function() {
 
       var currentTitle = this.manga[i]["t"];
       var startingCharacter = currentTitle.charAt(0).toLowerCase();
+      var currentMangaGenres = this.manga[i]["c"];
+
 
       if(this.mangaAlphabet.hasOwnProperty(startingCharacter)) {
         this.mangaAlphabet[startingCharacter].push(currentTitle);
@@ -34,7 +39,15 @@ app.service("MangaService", [function() {
         this.mangaAlphabet[startingCharacter].push(currentTitle);
 
       }
+
+      for(var genre in currentMangaGenres){
+        if(!this.genreList.includes(currentMangaGenres[genre])){
+          this.genreList.push(currentMangaGenres[genre]);
+        }
+      }
+      
     }
+      
   };
 
   /** Returns a list of manga that start with a given letter **/ 
@@ -52,6 +65,7 @@ app.service("MangaService", [function() {
     return this.manga;
   };
 
+
   /** returns a range of index values from manga list **/
   this.getMangaListRange = function getMangaListRange(start, end) {
 
@@ -62,5 +76,6 @@ app.service("MangaService", [function() {
 
     return copy;
   };
+
 
 }]);
