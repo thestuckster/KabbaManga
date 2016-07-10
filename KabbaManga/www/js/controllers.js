@@ -2,7 +2,7 @@ angular.module('kabaMangaApp.controllers', [])
 
 
 
-.controller('AppCtrl', function($scope, $ionicModal, $timeout, $http, MangaService) {
+.controller('AppCtrl', function($scope, $ionicModal, $timeout, $http, $location, $ionicSideMenuDelegate, MangaService, GenreFilterService) {
 
   // With the new view caching in Ionic, Controllers are only called
   // when they are recreated or on app start, instead of every page change.
@@ -12,9 +12,59 @@ angular.module('kabaMangaApp.controllers', [])
   //});
 
   $scope.hasManga = false;
+  var filterList = [];
+
+  $scope.showGenreFilter = function showGenreFilter(){
+
+    if($location.path() == '/app/mangaList'){
+      return true;
+    }
+    return false;
+  }
   
-  //Filter Manga By Genre
-  //$scope.genreFilter = "Historical";
+  $scope.addGenre = function addGenre(genre){
+    if(this.test){
+      GenreFilterService.addGenreToList(genre);
+      return;
+
+    }
+    GenreFilterService.removeGenreFilter(genre);
+  }
+
+  $scope.$watch(function () {
+    return $ionicSideMenuDelegate.isOpenRight();
+  },
+     function (isRightOpen) {
+       if (!isRightOpen){
+         angular.element(document).ready(function () {
+           var mangaCards = document.getElementsByClassName("card");
+
+           filterList = GenreFilterService.getGenreFilterList();
+           if(filterList.length === 0 && GenreFilterService.getHiddenMangaListSize() > 0){
+             var hiddenCards = GenreFilterService.getHiddenMangaList();
+            for(var i = 0; i < hiddenCards.length; i++){
+              hiddenCards[i].style.display = 'block';
+           }
+           return;
+         }
+
+           for(var i = 0; i < mangaCards.length; i++){
+            for(var genre in filterList ){
+               if (!mangaCards[i].innerText.includes(filterList[genre])) {
+                 GenreFilterService.hideManga(mangaCards[i]);
+                 mangaCards[i].style.display = 'none';
+                 break;
+               }
+               else{
+                mangaCards[i].style.display = 'block';
+              }
+            }
+          }
+
+         });
+       }
+  });
+
 
   
   $http.defaults.useXDomain = true;

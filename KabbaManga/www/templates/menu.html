@@ -21,24 +21,27 @@
         <ion-item menu-close ng-click="login()">
           Login
         </ion-item>
+        <ion-item menu-close href="#/app/home">
+          Home
+        </ion-item>
         <ion-item menu-close href="#/app/mangaList">
           Manga List
         </ion-item>
-        <ion-item menu-close href="#/app/genres">
+        <ion-item menu-close href="#/app/genres"()>
           Genres
         </ion-item>
       </ion-list>
     </ion-content>
   </ion-side-menu>
 
-  <ion-side-menu side="right">
+  <ion-side-menu side="right" ng-if="showGenreFilter()">
     <ion-header-bar class="bar-stable">
-      <h1 class="title">Sort By Genres</h1>
+      <h1 class="title">Filter By Genre</h1>
     </ion-header-bar>
     <ion-content>
       <ion-list ">
         <ion-item ng-repeat="g in genres">
-          <ion-checkbox>{{g}}</ion-checkbox>
+          <ion-checkbox ng-model="test" ng-change="addGenre(g)">{{g}}</ion-checkbox>
         </ion-item>
       </ion-list>
     </ion-content>

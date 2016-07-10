@@ -23,6 +23,8 @@ app.controller('mangaListCtrl', ["$scope", "$timeout","$location", "$http", "Man
   }
 
   function addGenreList(manga) {
+      
+
     console.info("Adding Genres"); 
     for(var i = 0; i < manga.length; i++) {
 
@@ -39,8 +41,11 @@ app.controller('mangaListCtrl', ["$scope", "$timeout","$location", "$http", "Man
       currentManga.genres = genres;
     }
 
+
+
   }
 
   grabManga();
+  
 
 }]);
