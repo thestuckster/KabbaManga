@@ -35,3 +35,8 @@
   background-size: contain;
 }
 
+#searchBar {
+  margin:44px;
+  height:5%;
+  width:100%;
+}
