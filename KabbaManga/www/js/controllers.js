@@ -14,14 +14,32 @@ angular.module('kabaMangaApp.controllers', [])
   $scope.hasManga = false;
   var filterList = [];
 
+  $http.defaults.useXDomain = true;
+  $http({
+    method: 'GET',
+    url: "https://www.mangaeden.com/api/list/0/"
+  }).then(function success(res) {
+    console.info("GOT MANGAS");
+    var manga = res.data["manga"];
+    $scope.hasManga = true;
+
+    MangaService.setManga(manga);
+    MangaService.sortByPopularity();
+    // MangaService.sortMangaByDefault();
+    $scope.genres = MangaService.genreList.sort();
+  });
+
+
+
   $scope.showGenreFilter = function showGenreFilter(){
 
+    var showFilter = false;
     if($location.path() == '/app/mangaList'){
-      return true;
+      showFilter = true;
     }
-    return false;
-  }
-  
+    return showFilter;
+  };
+
   $scope.addGenre = function addGenre(genre){
     if(this.test){
       GenreFilterService.addGenreToList(genre);
@@ -29,7 +47,7 @@ angular.module('kabaMangaApp.controllers', [])
 
     }
     GenreFilterService.removeGenreFilter(genre);
-  }
+  };
 
   $scope.$watch(function () {
     return $ionicSideMenuDelegate.isOpenRight();
@@ -65,20 +83,6 @@ angular.module('kabaMangaApp.controllers', [])
        }
   });
 
-
-  
-  $http.defaults.useXDomain = true;
-  $http({
-    method: 'GET',
-    url: "https://www.mangaeden.com/api/list/0/"
-  }).then(function success(res) {
-    console.info("GOT MANGAS");
-    var manga = res.data["manga"];
-    $scope.hasManga = true;
-    MangaService.setManga(manga);
-    MangaService.sortMangaIntoAlphabet();
-    $scope.genres = MangaService.genreList.sort();
-  });
 
   // Form data for the login modal
   $scope.loginData = {};

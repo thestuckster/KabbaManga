@@ -9,7 +9,28 @@ app.service("MangaService", [function() {
   this.manga = [];
   this.mangaAlphabet = {};
   this.genreList = [];
-  
+  this.popularityList = [];
+
+  /** sorts manga by the "hits" variable returned from the api **/
+  this.sortByPopularity = function sortByPopularity() {
+
+    this.popularityList = this.manga.slice(); //Copy the original array;
+    this.popularityList = this.popularityList.sort(function(a, b) {
+      return (a["h"] < b["h"]) ? 1 : ((a["h"] > b["h"]) ? -1 : 0);
+    });
+
+  };
+
+  /** Returns a given amount of manga from the popularity list **/
+  this.getPopularManga = function getPopularManga(amount) {
+
+    var copy = [];
+    for(var i = 0; i < amount; i++) {
+      copy.push(this.popularityList[i]);
+    }
+
+    return copy;
+  };
 
   /** sorts manga list alphabetically by title **/
   this.sortByTitle = function sortByTitle() {
@@ -18,9 +39,10 @@ app.service("MangaService", [function() {
     });
   };
 
-
-  /** sorts manga into a big ass json by starting letter and shit **/
-  this.sortMangaIntoAlphabet = function sortMangeIntoAlphabet() {
+  /** 1) Sorts manga into a list of alphabetical objects. Keys are the starting title letter and values are the manga
+   *  2) Sorts manga into genre categories.
+   **/
+  this.sortMangaByDefault = function sortMangaByDefault() {
 
     //StackOverflow says this is the fastest loop and since there's 16k manga, why the fuck not?
     var i = this.manga.length;
@@ -45,12 +67,10 @@ app.service("MangaService", [function() {
           this.genreList.push(currentMangaGenres[genre]);
         }
       }
-      
     }
-      
   };
 
-  /** Returns a list of manga that start with a given letter **/ 
+  /** Returns a list of manga that start with a given letter **/
   this.getMangaByStartingLetter = function getMangaByStartingLetter(startingLetter) {
     return this.mangaAlphabet[startingLetter];
   };
@@ -65,7 +85,6 @@ app.service("MangaService", [function() {
     return this.manga;
   };
 
-
   /** returns a range of index values from manga list **/
   this.getMangaListRange = function getMangaListRange(start, end) {
 
@@ -76,6 +95,4 @@ app.service("MangaService", [function() {
 
     return copy;
   };
-
-
 }]);
