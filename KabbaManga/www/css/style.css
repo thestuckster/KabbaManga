@@ -36,7 +36,13 @@
 }
 
 #searchBar {
-  margin:44px;
+  margin-top: 12%;
+  margin-left: auto;
+  margin-right: auto;
   height:5%;
   width:100%;
+}
+
+#popularity_list{
+  padding-top: 15%;
 }
