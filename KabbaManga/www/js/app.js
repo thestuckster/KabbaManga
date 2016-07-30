@@ -108,6 +108,16 @@ angular.module('kabaMangaApp', ['ionic','kabaMangaApp.controllers'])
           controller: 'chapterViewCtrl'
         }
       }
+    })
+
+    .state('app.favorites', {
+      url: '/favorites',
+      views: {
+        'menuContent': {
+          templateUrl: 'templates/favorite_mangas.html',
+          controller: 'genreCtrl'
+        }
+      }
     });
 
   // if none of the above states are matched, use this as the fallback

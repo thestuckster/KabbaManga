@@ -6,10 +6,12 @@ app.controller('mangaListCtrl', ["$scope", "$timeout","$location", "$http", "Man
   $http.defaults.useXDomain = true;
   $scope.genreFilter = GenreFilterService.getGenre();
 
+
   $scope.goToDetailView = function goToDetailView(mangaToDetail) {
     MangaDetailService.setManga(mangaToDetail);
     $location.path("/app/detail");
   };
+
 
   function grabManga() {
     MangaService.sortByTitle();

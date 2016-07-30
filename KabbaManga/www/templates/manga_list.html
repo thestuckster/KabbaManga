@@ -21,14 +21,16 @@
   <input type="search" placeholder="Search" ng-model="searchText">
 </label>
   <ion-content style="padding:40px;" >
-    <div class="card" ng-repeat="m in manga | filter:searchText" ng-click="goToDetailView(m)">
+    <ion-list ng-Controller = "genreCtrl">
+    <ion-item class="card item-icon-right" ng-repeat="m in manga | filter:searchText" ng-click="goToDetailView(m)">
+    <ion-option-button class="button-positive" ng-click="addToFavList(m)">Favorite</ion-option-button>
       <div class="item item-thumbnail-right"  href>
         <img ng-src="{{ 'https://cdn.mangaeden.com/mangasimg/' + m['im'] }}" />
         <h2>{{m["t"]}}</h2>
         <p>{{m.genres}}</p>
+        <i id="fav"  class="ion-heart" ng-if="inFavList(m)"></i>
       </div>
-    </div>
+      </ion-item>
+    </ion-list>
   </ion-content>
 </ion-view>
-
-

@@ -2,9 +2,10 @@ app.service('GenreFilterService', function($location) {
   this.genreFilter = "";
   this.genreFilterList = [];
   this.hiddenMangaList = [];
+  this.favoriteManga = [];
+
 
   this.setGenre = function setGenre(genre){
-    console.log($location.path());
     this.genreFilter = genre;
   };
 

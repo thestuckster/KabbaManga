@@ -1,0 +1,21 @@
+<ion-view view-title="Favorite Manga">
+<!--
+<label class="item item-input" id="searchBar">
+  <i class="icon ion-search placeholder-icon"></i>
+  <input type="search" placeholder="Search" ng-model="searchText">
+</label>
+-->
+  <ion-content style="padding:40px;" >
+    <ion-list>
+    <ion-item class="card item-icon-right" ng-repeat="m in favList" ng-click="goToDetailView(m)">
+    <ion-option-button class="button-assertive" ng-click="addToFavList(m)">Remove</ion-option-button>
+      <div class="item item-thumbnail-right"  href>
+        <img ng-src="{{ 'https://cdn.mangaeden.com/mangasimg/' + m['im'] }}" />
+        <h2>{{m["t"]}}</h2>
+        <p>{{m.genres}}</p>
+        <i id="fav"  class="ion-heart" ng-if="inFavList(m)"></i>
+      </div>
+      </ion-item>
+    </ion-list>
+  </ion-content>
+</ion-view>

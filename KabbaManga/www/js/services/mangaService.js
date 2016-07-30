@@ -10,11 +10,13 @@ app.service("MangaService", [function() {
   this.mangaAlphabet = {};
   this.genreList = [];
   this.popularityList = [];
+  this.favoriteManga = [];
 
   /** sorts manga by the "hits" variable returned from the api **/
   this.sortByPopularity = function sortByPopularity() {
 
     this.popularityList = this.manga.slice(); //Copy the original array;
+
     this.popularityList = this.popularityList.sort(function(a, b) {
       return (a["h"] < b["h"]) ? 1 : ((a["h"] > b["h"]) ? -1 : 0);
     });
@@ -75,9 +77,22 @@ app.service("MangaService", [function() {
     return this.mangaAlphabet[startingLetter];
   };
 
-  /** Sets manga list when manga is returned from API **/
+  /** Sets manga list when manga is returned from API and Gets Generes**/
   this.setManga = function setManga(manga) {
     this.manga = manga;
+
+    var i = this.manga.length;
+    while(i--) {
+
+      var currentMangaGenres = this.manga[i]["c"];
+      for(var genre in currentMangaGenres){
+        if(!this.genreList.includes(currentMangaGenres[genre])){
+          this.genreList.push(currentMangaGenres[genre]);
+        }
+      }
+    }
+
+
   };
 
   /** returns the entire manga list. **/
