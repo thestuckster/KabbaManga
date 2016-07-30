@@ -2,7 +2,7 @@ angular.module('kabaMangaApp.controllers', [])
 
 
 
-.controller('AppCtrl', function($scope, $ionicModal, $timeout, $http, $location, $ionicSideMenuDelegate, MangaService, GenreFilterService) {
+.controller('AppCtrl', function($scope, $ionicModal, $timeout, $http, $location, $ionicSideMenuDelegate, $ImageCacheFactory, MangaService, GenreFilterService) {
 
   // With the new view caching in Ionic, Controllers are only called
   // when they are recreated or on app start, instead of every page change.
@@ -26,13 +26,11 @@ angular.module('kabaMangaApp.controllers', [])
     MangaService.setManga(manga);
     MangaService.sortByPopularity();
     // MangaService.sortMangaByDefault();
+    cachePopularCoverImages();
     $scope.genres = MangaService.genreList.sort();
   });
 
-
-
   $scope.showGenreFilter = function showGenreFilter(){
-
     var showFilter = false;
     if($location.path() == '/app/mangaList'){
       showFilter = true;
@@ -114,6 +112,21 @@ angular.module('kabaMangaApp.controllers', [])
       $scope.closeLogin();
     }, 1000);
   };
+
+  function cachePopularCoverImages() {
+    var urlsForCachedImages = [];
+    var popularMangas = MangaService.getPopularManga(50);
+    var i = popularMangas.length;
+
+    while(i--) {
+      var location = popularMangas[i]["im"];
+      if(location != null) {
+        urlsForCachedImages.push("https://cdn.mangaeden.com/mangasimg/" + location);
+      }
+    }
+
+    $ImageCacheFactory.Cache(urlsForCachedImages);
+  }
 })
 
 .controller('HomeCtrl', function($scope) {
