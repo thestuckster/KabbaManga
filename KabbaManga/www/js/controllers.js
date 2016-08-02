@@ -11,25 +11,8 @@ angular.module('kabaMangaApp.controllers', [])
   //$scope.$on('$ionicView.enter', function(e) {
   //});
 
+  // ######## $SCOPE ###########
   $scope.hasManga = false;
-  var filterList = [];
-
-  $http.defaults.useXDomain = true;
-  $http({
-    method: 'GET',
-    url: "https://www.mangaeden.com/api/list/0/"
-  }).then(function success(res) {
-    console.info("GOT MANGAS");
-    var manga = res.data["manga"];
-    $scope.hasManga = true;
-
-    MangaService.setManga(manga);
-    MangaService.sortByPopularity();
-    // MangaService.sortMangaByDefault();
-    cachePopularCoverImages();
-    $scope.genres = MangaService.genreList.sort();
-  });
-
   $scope.showGenreFilter = function showGenreFilter(){
     var showFilter = false;
     if($location.path() == '/app/mangaList'){
@@ -48,50 +31,40 @@ angular.module('kabaMangaApp.controllers', [])
   };
 
   $scope.$watch(function () {
-    return $ionicSideMenuDelegate.isOpenRight();
-  },
-     function (isRightOpen) {
-       if (!isRightOpen){
-         angular.element(document).ready(function () {
-           var mangaCards = document.getElementsByClassName("card");
+      return $ionicSideMenuDelegate.isOpenRight();
+    },
+    function (isRightOpen) {
+      if (!isRightOpen){
+        angular.element(document).ready(function () {
+          var mangaCards = document.getElementsByClassName("card");
 
-           filterList = GenreFilterService.getGenreFilterList();
-           if(filterList.length === 0 && GenreFilterService.getHiddenMangaListSize() > 0){
-             var hiddenCards = GenreFilterService.getHiddenMangaList();
+          filterList = GenreFilterService.getGenreFilterList();
+          if(filterList.length === 0 && GenreFilterService.getHiddenMangaListSize() > 0){
+            var hiddenCards = GenreFilterService.getHiddenMangaList();
             for(var i = 0; i < hiddenCards.length; i++){
               hiddenCards[i].style.display = 'block';
-           }
-           return;
-         }
+            }
+            return;
+          }
 
-           for(var i = 0; i < mangaCards.length; i++){
+          for(var j = 0; j < mangaCards.length; j++){
             for(var genre in filterList ){
-               if (!mangaCards[i].innerText.includes(filterList[genre])) {
-                 GenreFilterService.hideManga(mangaCards[i]);
-                 mangaCards[i].style.display = 'none';
-                 break;
-               }
-               else{
-                mangaCards[i].style.display = 'block';
+              if (!mangaCards[j].innerText.includes(filterList[genre])) {
+                GenreFilterService.hideManga(mangaCards[j]);
+                mangaCards[j].style.display = 'none';
+                break;
+              }
+              else{
+                mangaCards[j].style.display = 'block';
               }
             }
           }
 
-         });
-       }
-  });
-
+        });
+      }
 
   // Form data for the login modal
   $scope.loginData = {};
-
-  // Create the login modal that we will use later
-  $ionicModal.fromTemplateUrl('templates/login.html', {
-    scope: $scope
-  }).then(function(modal) {
-    $scope.modal = modal;
-  });
-
   // Triggered in the login modal to close it
   $scope.closeLogin = function() {
     $scope.modal.hide();
@@ -113,9 +86,31 @@ angular.module('kabaMangaApp.controllers', [])
     }, 1000);
   };
 
-  function cachePopularCoverImages() {
+  // ####### MANGA GETTING / SETTING/ SORTING ########
+
+  var filterList = [];
+  $http.defaults.useXDomain = true;
+  $http({
+    method: 'GET',
+    url: "https://www.mangaeden.com/api/list/0/"
+  }).then(function success(res) {
+    var manga = res.data["manga"];
+    $scope.hasManga = true;
+
+    setAndSortManga(manga);
+    cachePopularCoverImages(50);
+  });
+
+  function setAndSortManga(manga) {
+    MangaService.setManga(manga);
+    MangaService.sortByPopularity();
+    MangaService.sortMangaByDefault();
+    $scope.genres = MangaService.genreList.sort();
+  }
+
+  function cachePopularCoverImages(numberOfImages) {
     var urlsForCachedImages = [];
-    var popularMangas = MangaService.getPopularManga(50);
+    var popularMangas = MangaService.getPopularManga(numberOfImages);
     var i = popularMangas.length;
 
     while(i--) {
@@ -127,9 +122,21 @@ angular.module('kabaMangaApp.controllers', [])
 
     $ImageCacheFactory.Cache(urlsForCachedImages);
   }
+  });
+
+
+
+  // Create the login modal that we will use later
+  $ionicModal.fromTemplateUrl('templates/login.html', {
+    scope: $scope
+  }).then(function(modal) {
+    $scope.modal = modal;
+  });
 })
 
+
 .controller('HomeCtrl', function($scope) {
+  //TODO: uneeded.
   $scope.playlists = [
     { title: 'Reggae', id: 1 },
     { title: 'Chill', id: 2 },
