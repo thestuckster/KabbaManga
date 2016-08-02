@@ -1,7 +1,4 @@
 angular.module('kabaMangaApp.controllers', [])
-
-
-
 .controller('AppCtrl', function($scope, $ionicModal, $timeout, $http, $location, $ionicSideMenuDelegate, $ImageCacheFactory, MangaService, GenreFilterService) {
 
   // With the new view caching in Ionic, Controllers are only called
