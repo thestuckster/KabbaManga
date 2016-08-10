@@ -1,0 +1,9 @@
+<ion-view view-title="Manga by Title">
+  <ion-content>
+    <ion-list>
+      <ion-item ng-repeat="letter in alphabet">
+        <button id="alphabet_button" class="button button-full" ng-click="viewTitlesForLetter(letter)">{{letter}}</button>
+      </ion-item>
+    </ion-list>
+  </ion-content>
+</ion-view>

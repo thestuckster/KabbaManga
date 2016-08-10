@@ -114,4 +114,9 @@ app.service("MangaService", [function() {
     return copy;
   };
 
+  /** get the alphabetically sorted manga master list **/
+  this.getMangaAlphabetList = function getMangaAlphabetList() {
+    return this.mangaAlphabet;
+  };
+
 }]);

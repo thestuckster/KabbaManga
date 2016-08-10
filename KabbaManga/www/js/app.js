@@ -118,6 +118,16 @@ angular.module('kabaMangaApp', ['ionic', 'ionic.ion.imageCacheFactory','kabaMang
           controller: 'genreCtrl'
         }
       }
+    })
+
+    .state('app.alphabet', {
+      url: '/alphabetView',
+      views: {
+        'menuContent': {
+          templateUrl: 'templates/alphabet_overview.html',
+          controller: 'alphabetOverviewCtrl'
+        }
+      }
     });
 
   // if none of the above states are matched, use this as the fallback
