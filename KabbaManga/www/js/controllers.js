@@ -107,7 +107,8 @@ angular.module('kabaMangaApp.controllers', [])
 
   function cachePopularCoverImages(numberOfImages) {
     var urlsForCachedImages = [];
-    var i = MangaService.getPopularManga(numberOfImages).length;
+    var popularMangas = MangaService.getPopularManga(numberOfImages);
+    var i = popularMangas.length;
 
     while(i--) {
       var location = popularMangas[i]["im"];

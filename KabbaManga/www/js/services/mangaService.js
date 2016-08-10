@@ -1,9 +1,5 @@
-/**
- * Created by stephen on 6/25/2016.
- */
-
+/** Created by stephen on 6/25/2016. */
 var app = angular.module('kabaMangaApp');
-
 app.service("MangaService", [function() {
 
   this.manga = [];
@@ -14,18 +10,15 @@ app.service("MangaService", [function() {
 
   /** sorts manga by the "hits" variable returned from the api **/
   this.sortByPopularity = function sortByPopularity() {
-
     this.popularityList = this.manga.slice(); //Copy the original array;
 
     this.popularityList = this.popularityList.sort(function(a, b) {
       return (a["h"] < b["h"]) ? 1 : ((a["h"] > b["h"]) ? -1 : 0);
     });
-
   };
 
   /** Returns a given amount of manga from the popularity list **/
   this.getPopularManga = function getPopularManga(amount) {
-
     var copy = [];
     for(var i = 0; i < amount; i++) {
       copy.push(this.popularityList[i]);
@@ -53,10 +46,23 @@ app.service("MangaService", [function() {
       var currentTitle = this.manga[i]["t"];
       var startingCharacter = currentTitle.charAt(0).toLowerCase();
       var currentMangaGenres = this.manga[i]["c"];
+      var alphabeticalPattern = /[a-z]/;
+      var numericalPattern = /[0-9]/;
 
+      this.mangaAlphabet["."] = [];
+      this.mangaAlphabet["#"] = [];
 
       if(this.mangaAlphabet.hasOwnProperty(startingCharacter)) {
-        this.mangaAlphabet[startingCharacter].push(currentTitle);
+        if(alphabeticalPattern.test(startingCharacter)) {
+          this.mangaAlphabet[startingCharacter].push(currentTitle);
+
+        } else if (numericalPattern.test(startingCharacter)) {
+          this.mangaAlphabet["#"].push(currentTitle);
+
+        } else {
+          this.mangaAlphabet["."].push(currentTitle);
+
+        }
 
       } else {
         this.mangaAlphabet[startingCharacter] = [];
@@ -91,8 +97,6 @@ app.service("MangaService", [function() {
         }
       }
     }
-
-
   };
 
   /** returns the entire manga list. **/
@@ -102,7 +106,6 @@ app.service("MangaService", [function() {
 
   /** returns a range of index values from manga list **/
   this.getMangaListRange = function getMangaListRange(start, end) {
-
     var copy = [];
     for(var i = start; i < end; i++) {
       copy.push(this.manga[i]);
@@ -110,4 +113,5 @@ app.service("MangaService", [function() {
 
     return copy;
   };
+
 }]);
